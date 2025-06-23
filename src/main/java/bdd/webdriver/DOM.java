@@ -22,7 +22,6 @@ public class DOM {
     private static String url;
     public static WebDriver webDriver() {
         if (driver == null) {
-
             String chromeDriverPath = "C:\\Users\\pcnit\\OneDrive - BerryMuch\\avalburo\\EjercicioCucumberJava21\\src\\test\\resources\\webdriver\\chromedriver.exe";
             System.setProperty("webdriver.chrome.driver", chromeDriverPath);
             driver = new ChromeDriver();

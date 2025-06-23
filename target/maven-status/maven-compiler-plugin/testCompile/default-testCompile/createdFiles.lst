@@ -1,0 +1,10 @@
+bdd\page\Checkout.class
+bdd\runner\Runner.class
+bdd\page\AgProducto.class
+bdd\step\confirmacionstep.class
+bdd\step\carritostep.class
+bdd\step\checkoutstep.class
+bdd\stepdefinition\CompSetepDefinition.class
+bdd\step\agregarpruductosstep.class
+bdd\page\Carrito.class
+bdd\page\confirmacion.class
