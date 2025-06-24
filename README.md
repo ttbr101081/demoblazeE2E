@@ -30,4 +30,12 @@
 ![image](https://github.com/user-attachments/assets/87e565de-f3ec-4dc4-a001-a0779c177894)
 2. el informe se observara de la siguiente manera
 ![image](https://github.com/user-attachments/assets/4f45a685-5fbb-42c7-adef-22800b6e1340)
-#### Nota para no tener inconvenientes con el informe se recomienda correr la primera vez por la opcion 2 
+#### Nota: para no tener inconvenientes con el informe se recomienda correr la primera vez por la opcion 2 
+
+## pasos para ver el informa enviado 
+1. en el explorador de archivos ingresar a la carpeta donde esta el proyecto 
+2. click en la carpeta target
+3. click en site
+4. click en cucumber-html-reports
+5. click en report-tag_E2E se abrira en su explorador preferido o determinado
+#### Nota: este archivo unicamente se reemplaza con la opcion 2 de correr la automatizacion
