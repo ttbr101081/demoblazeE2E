@@ -9,133 +9,142 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <serenity.version>3.9.8</serenity.version> <!-- Asegúrate de usar una versión reciente y compatible -->
+        <serenity.cucumber.version>3.9.8</serenity.cucumber.version> <!-- Debe coincidir con serenity.version o ser compatible -->
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.surefire.plugin.version>3.1.2</maven.surefire.plugin.version>
+        <maven.failsafe.plugin.version>3.1.2</maven.failsafe.plugin.version>
+        <maven.compiler.plugin.version>3.11.0</maven.compiler.plugin.version>
+        <cucumber.version>7.15.0</cucumber.version>
+        <junit.version>4.13.2</junit.version> <!-- Serenity BDD Screenplay usa JUnit 4 para los runners -->
+        <slf4j.version>2.0.9</slf4j.version> <!-- SLF4J es usado por Serenity -->
+        <lombok.version>1.18.30</lombok.version>
+        <webdrivermanager.version>5.7.0</webdrivermanager.version>
     </properties>
-    <dependencies>
 
-        <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
+    <dependencies>
+        <!-- Serenity Core -->
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>5.10.0</version>
+            <groupId>net.serenity-bdd</groupId>
+            <artifactId>serenity-core</artifactId>
+            <version>${serenity.version}</version>
             <scope>test</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+        <!-- Serenity Screenplay -->
         <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>4.18.1</version>
+            <groupId>net.serenity-bdd</groupId>
+            <artifactId>serenity-screenplay</artifactId>
+            <version>${serenity.version}</version>
+            <scope>test</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
+        <!-- Serenity Screenplay WebDriver -->
+        <dependency>
+            <groupId>net.serenity-bdd</groupId>
+            <artifactId>serenity-screenplay-webdriver</artifactId>
+            <version>${serenity.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- Serenity Cucumber -->
+        <dependency>
+            <groupId>net.serenity-bdd</groupId>
+            <artifactId>serenity-cucumber</artifactId>
+            <version>${serenity.cucumber.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- Cucumber Java -->
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
-            <version>7.15.0</version>
+            <version>${cucumber.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-junit -->
+        <!-- Cucumber JUnit (necesario para el runner) -->
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit</artifactId>
-            <version>7.15.0</version>
+            <version>${cucumber.version}</version>
             <scope>test</scope>
         </dependency>
-
+        <!-- JUnit (Serenity usa JUnit 4 para los runners de Cucumber) -->
         <dependency>
-            <groupId>tech.grasshopper</groupId>
-            <artifactId>extentreports-cucumber6-adapter</artifactId>
-            <version>2.16.0</version>
-            <!--<scope>test</scope>-->
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.30</version>
-            <scope>provided</scope>
-        </dependency>
-
-
-        <dependency>
-            <groupId>io.github.bonigarcia</groupId>
-            <artifactId>webdrivermanager</artifactId>
-            <version>5.7.0</version>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
             <scope>test</scope>
+        </dependency>
+        <!-- SLF4J API y Simple/Logback Implementation (Serenity lo necesita) -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-jdk14</artifactId>
-            <version>2.0.0-alpha0</version>
-            <scope>runtime</scope>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${slf4j.version}</version>
+            <scope>test</scope>
         </dependency>
-
-
-
-
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- WebDriverManager -->
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>${webdrivermanager.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- Selenium Java (generalmente es una dependencia transitiva de Serenity, pero puede ser útil declararla) -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>4.18.1</version> <!-- Asegúrate que esta versión es compatible con tu versión de Serenity -->
+        </dependency>
     </dependencies>
-
-
 
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.11.0</version>
+                <version>${maven.compiler.plugin.version}</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.1.2</version>
+                <version>${maven.surefire.plugin.version}</version>
                 <configuration>
-                    <skip>true</skip>
+                    <skip>true</skip> <!-- Las pruebas de Serenity se ejecutan con failsafe -->
                 </configuration>
             </plugin>
-            <!-- attach-sources -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <version>3.3.0</version>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <!-- attach-javadoc -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.5.0</version>
-                <executions>
-                    <execution>
-                        <id>attach-javadocs</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>3.1.2</version>
+                <version>${maven.failsafe.plugin.version}</version>
+                <configuration>
+                    <includes>
+                        <include>**/*Runner.java</include> <!-- Patrón para tus clases Runner -->
+                        <include>**/Test*.java</include>
+                        <include>**/*Test.java</include>
+                        <include>**/*TestSuite.java</include>
+                        <include>**/When*.java</include>
+                    </includes>
+                    <!-- Puedes configurar propiedades del sistema aquí si es necesario -->
+                    <!-- <systemPropertyVariables>
+                        <webdriver.base.url>${webdriver.base.url}</webdriver.base.url>
+                    </systemPropertyVariables> -->
+                </configuration>
                 <executions>
                     <execution>
-                        <configuration>
-                            <includes>
-                                <include>**/*Runner.java</include>
-                                <include>**/RunnerTest.java</include>
-                            </includes>
-                            <parallel>methods</parallel>
-                            <useUnlimitedThreads>true</useUnlimitedThreads>
-                            <!--<threadCount>1</threadCount>-->
-                        </configuration>
                         <goals>
                             <goal>integration-test</goal>
                             <goal>verify</goal>
@@ -144,25 +153,29 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>net.masterthought</groupId>
-                <artifactId>maven-cucumber-reporting</artifactId>
-                <version>3.11.0</version>
+                <groupId>net.serenity-bdd.maven.plugins</groupId>
+                <artifactId>serenity-maven-plugin</artifactId>
+                <version>${serenity.version}</version> <!-- Usa la misma versión que serenity-core -->
+                <configuration>
+                    <!-- Opciones de configuración del plugin de Serenity -->
+                </configuration>
                 <executions>
                     <execution>
-                        <id>cucumber-reports</id>
+                        <id>serenity-reports</id>
                         <phase>post-integration-test</phase>
                         <goals>
-                            <goal>generate</goal>
+                            <goal>aggregate</goal>
                         </goals>
-                        <configuration>
-                            <projectName>CucumberReport</projectName>
-                            <outputDirectory>${project.build.directory}/site</outputDirectory>
-                            <cucumberOutput>${project.build.directory}/build/cucumber.json</cucumberOutput>
-                        </configuration>
                     </execution>
                 </executions>
+                 <dependencies>
+                    <dependency>
+                        <groupId>net.serenity-bdd</groupId>
+                        <artifactId>serenity-core</artifactId>
+                        <version>${serenity.version}</version>
+                    </dependency>
+                 </dependencies>
             </plugin>
         </plugins>
     </build>
-
 </project>
